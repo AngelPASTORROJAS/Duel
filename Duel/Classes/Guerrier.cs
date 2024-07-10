@@ -16,7 +16,7 @@ namespace Duel.Classes
 
         #region Propriétés
         public String Nom { get => _nom; set => _nom = value; }
-        public int Pv { get => _pv; set => _pv = value; }
+        public int Pv { get => _pv; set => _pv = value>0?value:0; }
         public int NbDesAttaques { get => _nbDesAttaques; set => _nbDesAttaques = value; }
         #endregion
 
@@ -30,10 +30,22 @@ namespace Duel.Classes
         #endregion
 
         #region Méthodes
-        public int Attaque()
+        public bool IsDeath()
+        {
+            return Pv == 0;
+        }
+
+        public virtual int Attaque(Guerrier guerrier)
         {
             Random rnd = new Random();
-            return rnd.Next(1,6+1);
+            int hit = rnd.Next(1, 6 + 1);
+            guerrier.Pv -= hit;
+            return hit;
+        }
+
+        public void AffichePv()
+        {
+            Console.WriteLine($"{Nom} possède {Pv} pv");
         }
         #endregion
     }

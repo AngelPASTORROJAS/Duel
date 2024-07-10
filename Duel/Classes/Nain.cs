@@ -8,8 +8,11 @@ namespace Duel.Classes
 {
     internal class Nain : Guerrier
     {
+        private int bouclier;
+        public int Bouclier {get; set;}
         public Nain(string nom, int pv, int nbAttaques) : base(nom, pv, nbAttaques)
         {
+            base.Pv += Bouclier;
         }
     }
 }
