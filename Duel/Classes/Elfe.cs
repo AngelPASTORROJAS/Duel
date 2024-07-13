@@ -12,11 +12,14 @@ namespace Duel.Classes
         {
         }
 
-        public override int Attaque(Guerrier guerrier){
-            Random rnd = new Random();
-            int hit = rnd.Next(2, 6 + 1);
-            guerrier.Pv -= hit;
-            return hit;
+        public override void Attaquer(Guerrier adv){
+            int i = 0;
+            Console.WriteLine($"{Nom} attack {adv.Nom}");
+            while (!adv.EstMort() && i < NbDesAttaques)
+            {
+                adv.SubirDegats(6);
+                i++;
+            }
         }
     }
 }

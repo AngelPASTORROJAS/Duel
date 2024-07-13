@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,44 +10,51 @@ namespace Duel.Classes
     internal class Guerrier
     {
         #region Attributs
-        protected String _nom;
+        protected string _nom;
         protected int _pv;
         protected int _nbDesAttaques;
         #endregion
 
         #region Propriétés
-        public String Nom { get => _nom; set => _nom = value; }
-        public int Pv { get => _pv; set => _pv = value>0?value:0; }
-        public int NbDesAttaques { get => _nbDesAttaques; set => _nbDesAttaques = value; }
+        public string Nom { get => _nom; }
+        protected int Pv { get => _pv; set => _pv = value>0?value:0; }
+        protected int NbDesAttaques { get => _nbDesAttaques; set => _nbDesAttaques = value; }
         #endregion
 
         #region Constructeur
-        public Guerrier(String nom, int pv , int nbAttaques) 
+        public Guerrier(string nom, int pv , int nbAttaques) 
         {
-            Nom = nom;
+            _nom = nom;
             Pv = pv;
             NbDesAttaques = nbAttaques;
         }
         #endregion
 
         #region Méthodes
-        public bool IsDeath()
+        public void AfficherInfos()
         {
-            return Pv == 0;
+            Console.WriteLine($" {Nom}{{PV={Pv}}}");
         }
 
-        public virtual int Attaque(Guerrier guerrier)
+        public void SubirDegats(int degats)
         {
-            Random rnd = new Random();
-            int hit = rnd.Next(1, 6 + 1);
-            guerrier.Pv -= hit;
-            return hit;
+            Pv -= degats;
+            if (Pv == 0 ) Console.WriteLine($"{Nom} is death.");
         }
 
-        public void AffichePv()
+        public virtual void Attaquer(Guerrier adv)
         {
-            Console.WriteLine($"{Nom} possède {Pv} pv");
+            int i = 0;
+            Console.WriteLine($"{Nom} attack {adv.Nom}");
+            while (!adv.EstMort() && i<NbDesAttaques)
+            {
+                Random rnd = new Random();
+                adv.SubirDegats(rnd.Next(1, 6 + 1));
+                i++;
+            }
         }
+
+        public bool EstMort() { return Pv==0; }
         #endregion
     }
 }

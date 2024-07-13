@@ -1,164 +1,54 @@
 ﻿using Duel.Classes;
 
-// Variable de valeur
-int pv;
-String? nom;
-int nbAttaque;
-int nbTour;
+Guerrier galahad = new Guerrier("Galahad",99,9);
+Guerrier lancelot = new Guerrier("Lancelot",99,9);
 
-bool existPv;
-bool existNbAttaque;
-bool existChoice;
+int nbTour = 4;
+bool isEnd = false;
+
+while (!isEnd && nbTour > 0)
+{
+    lancelot.AfficherInfos();
+    galahad.AfficherInfos();
+
+    galahad.Attaquer(lancelot);
+    if (lancelot.EstMort())
+    {
+        isEnd = true;
+        Console.WriteLine($"{galahad.Nom} is the winner.");
+    }
+    else
+    {
+        lancelot.Attaquer(galahad);
+        if (galahad.EstMort())
+        {
+            isEnd = true;
+            Console.WriteLine($"{lancelot.Nom} is the winner.");
+        }
+    }
+    Console.WriteLine();
+    nbTour -= 1;
+}
+
+/**
+int pv;
+string nom;
+int nbAttaque;
 int choice;
 
-Guerrier guerrier1;
-Guerrier guerrier2;
 
+/**
 Console.WriteLine("--- Duels de guerriers ---\n");
+nbTour = Utils.InputInt("Choisissez le nombre de tour jouer : ","\tErreur de saisis!",true);
 
-Console.Write("Choisissez le nombre de tour jouer : ");
-bool isValidNbTour;
-isValidNbTour = int.TryParse(Console.ReadLine(), out nbTour);
-while (!(isValidNbTour && nbTour>0))
-{
-    Console.ForegroundColor = ConsoleColor.Red;
-    Console.WriteLine("\tErreur de saisis!");
-    Console.ForegroundColor = ConsoleColor.White;
-    Console.Write("Choisissez le nombre de tour jouer : ");
-    isValidNbTour = int.TryParse(Console.ReadLine(), out nbTour);
-}
+nom = Utils.InputString("Choisissez le nom de votre premier geurrier : ", "\tVotre nom ne peux pas être vide!",true);
+pv = Utils.InputInt($"Choisissez le nombre point de vie de {nom} : ", "\tErreur de saisis!",true);
+nbAttaque = Utils.InputInt($"Choisissez le nombre d'attaque par tour de {nom} : ", "\tErreur de saisis!", true);
 
-Console.Write("Choisissez le nom de votre premier geurrier : ");
-nom = Console.ReadLine();
-while (!(nom?.Length > 0))
-{
-    Console.ForegroundColor = ConsoleColor.Red;
-    Console.WriteLine("\tVotre nom ne peux pas être vide!");
-    Console.ForegroundColor = ConsoleColor.White;
-    Console.Write("Choisissez le nom de votre premier guerrier : ");
-    nom = Console.ReadLine();
-}
+Console.WriteLine("\n\n--- Choix de la classe ---\n1 - Guerrier\n2 - Nain\n3 - Elfe\n");
+choice = Utils.InputInt("Choisissez la classe votre combattant : ", "\tErreur de saisis!", true);
 
-Console.Write($"Choisissez le nombre point de vie de {nom} : ");
-existPv = int.TryParse(Console.ReadLine(), out pv);
-while (!(existPv && nbTour > 0))
-{
-    Console.ForegroundColor = ConsoleColor.Red;
-    Console.WriteLine("\tErreur de saisis!");
-    Console.ForegroundColor = ConsoleColor.White;
-    Console.Write($"Choisissez le nombre point de vie de {nom} : ");
-    existPv = int.TryParse(Console.ReadLine(), out pv);
-}
-
-Console.Write($"Choisissez le nombre d'attaque par tour de {nom} : ");
-existNbAttaque = int.TryParse(Console.ReadLine(), out nbAttaque);
-while (!(existNbAttaque && nbTour > 0))
-{
-    Console.ForegroundColor = ConsoleColor.Red;
-    Console.WriteLine("\tErreur de saisis!");
-    Console.ForegroundColor = ConsoleColor.White;
-    Console.Write($"Choisissez le nombre d'attaque par tour de {nom} : ");
-    existNbAttaque = int.TryParse(Console.ReadLine(), out nbAttaque);
-}
-
-Console.WriteLine("\n\n--- Choix de la classe ---\n");
-Console.WriteLine("1 - Guerrier");
-Console.WriteLine("2 - Nain");
-Console.WriteLine("3 - Elfe\n");
-
-Console.Write("Choisissez la classe votre combattant : ");
-existChoice = int.TryParse(Console.ReadLine(), out choice);
-while (!(existChoice && choice>0 && choice<4))
-{
-    Console.ForegroundColor = ConsoleColor.Red;
-    Console.WriteLine("\tErreur de saisis!");
-    Console.ForegroundColor = ConsoleColor.White;
-    Console.Write("Choisissez la calsse votre combattant : ");
-    existChoice = int.TryParse(Console.ReadLine(), out choice);
-}
-switch (choice)
-{
-    case 1:
-        guerrier1 = new Guerrier(nom,pv,nbAttaque);
-        break;
-    case 2:
-        guerrier1 = new Nain(nom, pv, nbAttaque);
-        break;
-    case 3:
-        guerrier1 = new Elfe(nom, pv, nbAttaque);
-        break;
-    default:
-        break;
-}
 
 Console.ReadKey();
 Console.Clear();
-
-Console.Write("Choisissez le nom de votre deuxième geurrier : ");
-nom = Console.ReadLine();
-while (!(nom?.Length > 0))
-{
-    Console.ForegroundColor = ConsoleColor.Red;
-    Console.WriteLine("\tVotre nom ne peux pas être vide!");
-    Console.ForegroundColor = ConsoleColor.White;
-    Console.Write("Choisissez le nom de votre duexième guerrier : ");
-    nom = Console.ReadLine();
-}
-
-Console.Write($"Choisissez le nombre point de vie de {nom} : ");
-existPv = int.TryParse(Console.ReadLine(), out pv);
-while (!(existPv && nbTour > 0))
-{
-    Console.ForegroundColor = ConsoleColor.Red;
-    Console.WriteLine("\tErreur de saisis!");
-    Console.ForegroundColor = ConsoleColor.White;
-    Console.Write($"Choisissez le nombre point de vie de {nom} : ");
-    existPv = int.TryParse(Console.ReadLine(), out pv);
-}
-
-Console.Write($"Choisissez le nombre d'attaque par tour de {nom} : ");
-existNbAttaque = int.TryParse(Console.ReadLine(), out nbAttaque);
-while (!(existNbAttaque && nbTour > 0))
-{
-    Console.ForegroundColor = ConsoleColor.Red;
-    Console.WriteLine("\tErreur de saisis!");
-    Console.ForegroundColor = ConsoleColor.White;
-    Console.Write($"Choisissez le nombre d'attaque par tour de {nom} : ");
-    existNbAttaque = int.TryParse(Console.ReadLine(), out nbAttaque);
-}
-
-Console.WriteLine("\n\n--- Choix de la classe ---\n");
-Console.WriteLine("1 - Guerrier");
-Console.WriteLine("2 - Nain");
-Console.WriteLine("3 - Elfe\n");
-
-Console.Write("Choisissez la classe votre combattant : ");
-existChoice = int.TryParse(Console.ReadLine(), out choice);
-while (!(existChoice && choice > 0 && choice < 4))
-{
-    Console.ForegroundColor = ConsoleColor.Red;
-    Console.WriteLine("\tErreur de saisis!");
-    Console.ForegroundColor = ConsoleColor.White;
-    Console.Write("Choisissez la calsse votre combattant : ");
-    existChoice = int.TryParse(Console.ReadLine(), out choice);
-}
-switch (choice)
-{
-    case 1:
-        guerrier2 = new Guerrier(nom, pv, nbAttaque);
-        break;
-    case 2:
-        guerrier2 = new Nain(nom, pv, nbAttaque);
-        break;
-    case 3:
-        guerrier2 = new Elfe(nom, pv, nbAttaque);
-        break;
-    default:
-        break;
-}
-
-do
-{
-    guerrier1.Pv;
-    guerrier2;
-} while (guerrier1.IsDeath() || guerrier2.IsDeath());
+*/
