@@ -8,9 +8,7 @@ namespace Duel.Classes
 {
     internal class Elfe : Guerrier
     {
-        public Elfe(string nom, int pv, int nbAttaques) : base(nom, pv, nbAttaques)
-        {
-        }
+        public Elfe(string nom, int pv, int nbAttaques) : base(nom, pv, nbAttaques) { }
 
         public override void Attaquer(Guerrier adv){
             int i = 0;

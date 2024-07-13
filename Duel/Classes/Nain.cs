@@ -9,7 +9,7 @@ namespace Duel.Classes
     internal class Nain : Guerrier
     {
         private int _bouclier;
-        public int Bouclier {get; set;}
+        private int Bouclier {get => _bouclier; set => _bouclier=value;}
         public Nain(string nom, int pv, int nbAttaques, int bouclier) : base(nom, pv, nbAttaques)
         {
             Bouclier = bouclier;
