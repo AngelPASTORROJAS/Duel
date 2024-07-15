@@ -1,43 +1,15 @@
 ﻿using Duel.Classes;
 
-Guerrier galahad = new Guerrier("Galahad",99,9);
-Guerrier lancelot = new Guerrier("Lancelot",99,9);
+// Game game = new Game();
 
-int nbTour = 4;
-bool isEnd = false;
-
-while (!isEnd && nbTour > 0)
-{
-    lancelot.AfficherInfos();
-    galahad.AfficherInfos();
-
-    galahad.Attaquer(lancelot);
-    if (lancelot.EstMort())
-    {
-        isEnd = true;
-        Console.WriteLine($"{galahad.Nom} is the winner.");
-    }
-    else
-    {
-        lancelot.Attaquer(galahad);
-        if (galahad.EstMort())
-        {
-            isEnd = true;
-            Console.WriteLine($"{lancelot.Nom} is the winner.");
-        }
-    }
-    Console.WriteLine();
-    nbTour -= 1;
-}
-
-/**
+/*
 int pv;
 string nom;
 int nbAttaque;
 int choice;
+int nbTour;
 
 
-/**
 Console.WriteLine("--- Duels de guerriers ---\n");
 nbTour = Utils.InputInt("Choisissez le nombre de tour jouer : ","\tErreur de saisis!",true);
 
@@ -50,5 +22,4 @@ choice = Utils.InputInt("Choisissez la classe votre combattant : ", "\tErreur de
 
 
 Console.ReadKey();
-Console.Clear();
-*/
+Console.Clear();*/
