@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,7 +34,7 @@ namespace Duel.Classes
             bool existInt = decimal.TryParse(Console.ReadLine(), out decimal result);
             if (isPositive && existInt)
             {
-                existInt = existInt && result < 0;
+                existInt = existInt && result >= 0;
             }
             while (!existInt)
             {
@@ -44,8 +45,9 @@ namespace Duel.Classes
                 existInt = decimal.TryParse(Console.ReadLine(), out result);
                 if (isPositive && existInt)
                 {
-                    existInt = existInt && result < 0;
+                    existInt = existInt && result >= 0;
                 }
+
             }
             return result;
         }
@@ -67,13 +69,17 @@ namespace Duel.Classes
         /// The method `InputInt` returns an integer value that is input by the user after validating it
         /// based on the specified conditions.
         /// </returns>
-        public static int InputInt(string messageInput, string messageError, bool isPositive = false)
+        public static int InputInt(string messageInput, string messageError, bool isPositive = false, int[]? container = null)
         {
             Console.Write(messageInput);
             bool existInt = int.TryParse(Console.ReadLine(), out int result);
             if (isPositive && existInt)
             {
-                existInt = existInt && result < 0;
+                existInt &= result >= 0;
+            }
+            if (container!=null && existInt)
+            {
+                existInt &= container.Contains(result);
             }
             while (!existInt)
             {
@@ -84,7 +90,11 @@ namespace Duel.Classes
                 existInt = int.TryParse(Console.ReadLine(), out result);
                 if (isPositive && existInt)
                 {
-                    existInt = existInt && result < 0;
+                    existInt = existInt && result >= 0;
+                }
+                if (container != null && existInt)
+                {
+                    existInt &= container.Contains(result);
                 }
             }
             return result;

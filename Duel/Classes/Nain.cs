@@ -23,7 +23,7 @@ namespace Duel.Classes
         /// <param name="pv">Les points de vie du Nain</param>
         /// <param name="nbAttaques">Le nombre d'attaque du Nain</param>
         /// <param name="bouclier">Le nombre encaissement d'attaque du bouclier</param>
-        public Nain(string nom, int pv, int nbAttaques, int bouclier) : base(nom, pv, nbAttaques)
+        public Nain(string nom, int pv, int nbAttaques, int bouclier=50) : base(nom, pv, nbAttaques)
         {
             Bouclier = bouclier;
             Pv += Bouclier;
