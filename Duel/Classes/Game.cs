@@ -8,50 +8,105 @@
     internal class Game
     {
         /// <summary>
-        /// Le constructeur initialise les deux objets guerriers, Galahad et Lancelot, 
-        /// avec leurs noms, points de vie et force respectifs.
-        /// Il exécute ensuite la simulation de combat pendant un nombre fixe de tours, 
-        /// en affichant l'état de chaque guerrier après chaque tour.
-        /// La simulation se termine lorsque l'un des guerriers est vaincu ou 
-        /// que le nombre maximum de tours est atteint.
+        /// La classe <c>Game</c> fait jouer un utilisateur en saisissant ses 2 guerriers avec leurs caractéristiques qui s'affronteront sur un nombre défini de tour.
         /// </summary>
         public Game()
         {
-            // Créer les deux objets guerriers
-            Guerrier galahad = new Guerrier("Galahad", 99, 9);
-            Guerrier lancelot = new Guerrier("Lancelot", 99, 9);
+            
+            int nbTour;     // Le nombre de tour jouer dans la partie
+            int choice;     // Le choix de la classe Guerrier
+            int pv;         // Le nombre de points de vie du guerrier
+            string nom;     // Le nom du guerrier
+            int nbAttaque;  // Le nombre d'attaque effectuer par un guerrier par tour
+            int bouclier;   // Le nombre de dégats encaisser par le bouclier
+
+            // Création des deux guerriers
+            Guerrier guerrier1 = new Guerrier("Galahad", 99, 9);
+            Guerrier guerrier2 = new Guerrier("Lancelot", 99, 9);
+
+            // Menu de création du guerrier1
+            Console.WriteLine("--- Duels de guerriers ---");
+            nbTour = Utils.InputInt("Choisissez le nombre de tour jouer : ", "\tErreur de saisis!", true);
+
+            Console.WriteLine("\n\n--- Choix de la classe ---\n1 - Guerrier\n2 - Nain\n3 - Elfe\n");
+            choice = Utils.InputInt("Choisissez la classe votre combattant : ", "\tErreur de saisis!", true, [1, 2, 3]);
+            nom = Utils.InputString("Choisissez le nom de votre premier geurrier : ", "\tVotre nom ne peux pas être vide!", true);
+            pv = Utils.InputInt($"Choisissez le nombre point de vie de {nom} : ", "\tErreur de saisis!", true);
+            nbAttaque = Utils.InputInt($"Choisissez le nombre d'attaque par tour de {nom} : ", "\tErreur de saisis!", true);
+
+
+            if (choice == 1)
+            {
+                guerrier1 = new Guerrier(nom, pv, nbAttaque);
+            }
+            else if (choice == 2)
+            {
+                bouclier = Utils.InputInt("Choisissez le nombre de dégats encaisser par le bouclier : ", "\tErreur de saisis!", true);
+                guerrier1 = new Nain(nom, pv, nbAttaque, bouclier);
+            }
+            else
+            {
+                guerrier1 = new Elfe(nom, pv, nbAttaque);
+            }
+
+            Console.ReadKey();
+            Console.Clear();
+
+            Console.WriteLine("--- Duels de guerriers ---\n");
+            Console.WriteLine("--- Choix de la classe ---\n1 - Guerrier\n2 - Nain\n3 - Elfe\n");
+            choice = Utils.InputInt("Choisissez la classe votre combattant : ", "\tErreur de saisis!", true, [1, 2, 3]);
+            nom = Utils.InputString("Choisissez le nom de votre premier geurrier : ", "\tVotre nom ne peux pas être vide!", true);
+            pv = Utils.InputInt($"Choisissez le nombre point de vie de {nom} : ", "\tErreur de saisis!", true);
+            nbAttaque = Utils.InputInt($"Choisissez le nombre d'attaque par tour de {nom} : ", "\tErreur de saisis!", true);
+
+            if (choice == 1)
+            {
+                guerrier2 = new Guerrier(nom, pv, nbAttaque);
+            }
+            else if (choice == 2)
+            {
+                bouclier = Utils.InputInt("Choisissez le nombre de dégats encaisser par le bouclier : ", "\tErreur de saisis!", true);
+                guerrier2 = new Nain(nom, pv, nbAttaque, bouclier);
+            }
+            else
+            {
+                guerrier2 = new Elfe(nom, pv, nbAttaque);
+            }
+
 
             // Définir le nombre de tours et un drapeau pour suivre la fin de la simulation
-            int nbTour = 4;
             bool isEnd = false;
 
             // Exécuter la simulation de combat
             while (!isEnd && nbTour > 0)
             {
                 // Afficher l'état de chaque guerrier
-                lancelot.AfficherInfos();
-                galahad.AfficherInfos();
+                guerrier2.AfficherInfos();
+                guerrier1.AfficherInfos();
 
                 // Galahad attaque Lancelot
-                galahad.Attaquer(lancelot);
-                isEnd = lancelot.EstMort();
+                guerrier1.Attaquer(guerrier2);
+                isEnd = guerrier2.EstMort();
                 if (isEnd)
                 {
-                    Console.WriteLine($"{galahad.Nom} is the winner.");
+                    Console.WriteLine($"{guerrier1.Nom} is the winner.");
                 }
                 else
                 {
                     // Lancelot attaque Galahad
-                    lancelot.Attaquer(galahad);
-                    isEnd = galahad.EstMort();
+                    guerrier2.Attaquer(guerrier1);
+                    isEnd = guerrier1.EstMort();
                     if (isEnd)
                     {
-                        Console.WriteLine($"{lancelot.Nom} is the winner.");
+                        Console.WriteLine($"{guerrier2.Nom} is the winner.");
                     }
                 }
                 Console.WriteLine();
                 nbTour -= 1;
             }
+
+            Console.ReadKey();
+            Console.Clear();
         }
 
         /// <summary>
