@@ -11,7 +11,6 @@ int nbAttaque;
 Guerrier g1 = new Guerrier("1", 0, 0);
 Guerrier g2 = new Guerrier("2", 0, 0);
 
-
 Console.WriteLine("--- Duels de guerriers ---\n");
 nbTour = Utils.InputInt("Choisissez le nombre de tour jouer : ","\tErreur de saisis!",true);
 

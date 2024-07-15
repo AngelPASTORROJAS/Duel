@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Duel.Classes
 {
     /// <summary>
-    /// La classe <c>Nani</c> est une classe fille de <c>Guerrier</c> qui répresente un personnage avec un nom, un nombre de points de vie et d'attaque.
+    /// La classe <c>Nain</c> est une classe fille de <c>Guerrier</c> qui répresente un personnage avec un nom, un nombre de points de vie et d'attaque.
     /// Deplus, la classe Guerrier possède un bouclier qui prolonge ses points de vie
     /// </summary>
     internal class Nain : Guerrier
