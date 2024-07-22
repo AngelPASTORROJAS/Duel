@@ -104,11 +104,7 @@
                 // guerrier1 attaque guerrier2
                 guerrier1.Attaquer(guerrier2);
                 isEnd = guerrier2.EstMort();
-                if (isEnd)
-                {
-                    Console.WriteLine($"{guerrier1.Nom} is the winner.");
-                }
-                else
+                if (!isEnd)
                 {
                     // guerrier2 attaque guerrier1
                     guerrier2.Attaquer(guerrier1);
@@ -117,6 +113,10 @@
                     {
                         Console.WriteLine($"{guerrier2.Nom} is the winner.");
                     }
+                }
+                else
+                {
+                    Console.WriteLine($"{guerrier1.Nom} is the winner.");
                 }
                 Console.WriteLine();
                 nbTour -= 1;
